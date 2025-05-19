@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {CreditsComponent} from './credits/credits.component';
+import {RemboursementsComponent} from './remboursements/remboursements.component';
 
 const routes: Routes = [
   { path: 'clients', redirectTo : 'ClientsComponent', pathMatch : 'full' },
