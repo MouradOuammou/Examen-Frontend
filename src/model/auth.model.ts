@@ -9,9 +9,3 @@ export interface AuthResponse {
   role: string;
 }
 
-export interface User {
-  id?: number;
-  username: string;
-  role: string;
-  clientId?: number;
-}

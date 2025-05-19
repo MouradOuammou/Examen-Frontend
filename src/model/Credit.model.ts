@@ -1,5 +1,5 @@
-import {Remboursement} from './Client.model';
 import {StatutCredit} from './StatutCredit.model';
+import {Remboursement} from './model.model';
 
 export interface Credit {
   id?: number;
