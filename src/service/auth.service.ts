@@ -12,6 +12,7 @@ export class AuthService {
   private apiUrl = `${environment.apiUrl}/api/auth`;
   private currentUserSubject = new BehaviorSubject<AuthResponse | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+  user$: Observable<User | null> | undefined;
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser');
