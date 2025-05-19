@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Remboursement} from '../../model/model.model';
+import {Component, OnInit} from '@angular/core';
+import {Remboursement, TypeRemboursement} from '../../model/model.model';
 import {Credit} from '../../model/Credit.model';
 import {RemboursementService} from '../../service/remboursement.service';
 import {CreditService} from '../../service/credit.service';
@@ -25,8 +25,7 @@ export class RemboursementsComponent implements OnInit {
     id: 0,
     montant: 0,
     date: new Date(),
-    credit: {} as Credit,
-    methode: 'espece'
+
   };
 
   constructor(
@@ -91,11 +90,11 @@ export class RemboursementsComponent implements OnInit {
 
   private resetNewRemboursement(): void {
     this.newRemboursement = {
+      creditId: 0,
+      type: TypeRemboursement.REMBOURSEMENT_ANTICIPE,
       id: 0,
       montant: 0,
-      date: new Date(),
-      credit: {} as Credit,
-      methode: 'espece'
+      date: new Date()
     };
   }
 }

@@ -9,7 +9,7 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label">Client</label>
-            <select class="form-select" [(ngModel)]="newCredit.client.id" name="clientId" required>
+            <select class="form-select" [(ngModel)]="newCredit.clientId" name="clientId" required>
               <option *ngFor="let client of clients" [value]="client.id">
                 {{ client.nom }} {{ client.prenom }}
               </option>
@@ -37,7 +37,7 @@
         </div>
       </form>
     </div>
-  </div>
+</div>
 
   <!-- Liste des crédits -->
   <div class="card">
@@ -94,19 +94,17 @@
           <form (submit)="updateCredit()">
             <div class="mb-3">
               <label class="form-label">Statut</label>
-              <select class="form-select" [(ngModel)]="selectedCredit.statut" name="statut">
                 <option value="en_cours">En cours</option>
                 <option value="rembourse">Remboursé</option>
                 <option value="en_retard">En retard</option>
-              </select>
             </div>
             <div class="mb-3">
               <label class="form-label">Montant</label>
-              <input type="number" class="form-control" [(ngModel)]="selectedCredit.montant" name="montant" required>
+              <input type="number" class="form-control" [(ngModel)]="selectedCredit" name="montant" required>
             </div>
             <div class="mb-3">
               <label class="form-label">Taux d'Intérêt (%)</label>
-              <input type="number" step="0.01" class="form-control" [(ngModel)]="selectedCredit.tauxInteret" name="tauxInteret" required>
+              <input type="number" step="0.01" class="form-control" [(ngModel)]="selectedCredit" name="tauxInteret" required>
             </div>
             <button type="submit" class="btn btn-primary">Enregistrer</button>
           </form>

@@ -5,6 +5,7 @@ import {Credit} from '../../model/Credit.model';
 import {Client} from '../../model/Client.model';
 import {FormsModule} from '@angular/forms';
 import {CurrencyPipe, DatePipe} from '@angular/common';
+import {StatutCredit} from '../../model/StatutCredit.model';
 
 @Component({
   selector: 'app-credits',
@@ -20,14 +21,16 @@ export class CreditsComponent implements OnInit {
   credits: Credit[] = [];
   clients: Client[] = [];
   selectedCredit: Credit | null = null;
+  // @ts-ignore
   newCredit: Credit = {
     id: 0,
     montant: 0,
-    dateDebut: new Date(),
-    dateFin: new Date(),
     tauxInteret: 0,
-    client: {} as Client,
-    statut: 'en_cours'
+    statut: StatutCredit.EN_COURS,
+    //dateDemande : DatePipe,
+    duree: 0,
+    clientId: 0,
+    type: ''
   };
 
   constructor(
@@ -92,13 +95,12 @@ export class CreditsComponent implements OnInit {
 
   private resetNewCredit(): void {
     // @ts-ignore
+    // @ts-ignore
     this.newCredit = {
       id: 0,
       montant: 0,
-      dateFin: new Date(),
       tauxInteret: 0,
-      client: {} as Client,
-  //    statut: 'en_cours'
+
     };
   }
 }
