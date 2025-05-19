@@ -29,7 +29,8 @@ export class CreditService {
   createCredit(credit: Credit): Observable<Credit> {
     return this.http.post<Credit>(this.apiUrl, credit);
   }
-  updateCredit(id: number, credit: Credit): Observable<Credit> {
+
+  updateCredit(id: number | undefined, credit: Credit): Observable<Credit> {
     return this.http.put<Credit>(`${this.apiUrl}/${id}`, credit);
   }
   updateCreditStatut(id: number, statut: StatutCredit): Observable<Credit> {
