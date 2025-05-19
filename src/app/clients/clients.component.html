@@ -1,1 +1,95 @@
-<p>clients works!</p>
+<div class="container mt-4">
+  <h2>Gestion des Clients</h2>
+
+  <!-- Formulaire d'ajout -->
+  <div class="card mb-4">
+    <div class="card-header">Nouveau Client</div>
+    <div class="card-body">
+      <form (submit)="createClient()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-control" [(ngModel)]="newClient.nom" name="nom" required>
+          </div>
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" [(ngModel)]="newClient.email" name="email" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Téléphone</label>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Adresse</label>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Ajouter Client</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des clients -->
+  <div class="card">
+    <div class="card-header">Liste des Clients</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.id }}</td>
+          <td>{{ client.nom }}</td>
+          <td>{{ client.prenom }}</td>
+          <td>{{ client.email }}</td>
+          <td>{{ client.telephone }}</td>
+          <td>
+              <span [class.badge-success]="client.statut === 'actif'"
+                    [class.badge-danger]="client.statut === 'inactif'"
+                    class="badge">
+                {{ client.statut }}
+              </span>
+          </td>
+          <td>
+            <button (click)="selectClient(client)" class="btn btn-sm btn-info me-2">Modifier</button>
+            <button (click)="deleteClient(client.id)" class="btn btn-sm btn-danger">Supprimer</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal de modification -->
+  <div *ngIf="selectedClient" class="modal fade show" style="display: block; background-color: rgba(0,0,0,0.5)">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier Client</h5>
+          <button type="button" class="btn-close" (click)="selectedClient = null"></button>
+        </div>
+        <div class="modal-body">
+          <form (submit)="updateClient()">
+            <div class="mb-3">
+              <label class="form-label">Statut</label>
+                <option value="actif">Actif</option>
+                <option value="inactif">Inactif</option>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

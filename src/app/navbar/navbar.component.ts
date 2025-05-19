@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
-  user$: Observable<User | null>;
+  user$: Observable<User | null> | undefined;
 
   constructor(
     private authService: AuthService,
