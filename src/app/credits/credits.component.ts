@@ -3,10 +3,17 @@ import {CreditService} from '../../service/credit.service';
 import {ClientService} from '../../service/client.service';
 import {Credit} from '../../model/Credit.model';
 import {Client} from '../../model/Client.model';
+import {FormsModule} from '@angular/forms';
+import {CurrencyPipe, DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-credits',
   templateUrl: './credits.component.html',
+  imports: [
+    FormsModule,
+    DatePipe,
+    CurrencyPipe
+  ],
   styleUrls: ['./credits.component.css']
 })
 export class CreditsComponent implements OnInit {
@@ -84,14 +91,14 @@ export class CreditsComponent implements OnInit {
   }
 
   private resetNewCredit(): void {
+    // @ts-ignore
     this.newCredit = {
       id: 0,
       montant: 0,
-      dateDebut: new Date(),
       dateFin: new Date(),
       tauxInteret: 0,
       client: {} as Client,
-      statut: 'en_cours'
+  //    statut: 'en_cours'
     };
   }
 }
