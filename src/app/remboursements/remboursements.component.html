@@ -1,1 +1,111 @@
-<p>remboursements works!</p>
+<div class="container mt-4">
+  <h2>Gestion des Remboursements</h2>
+
+  <!-- Formulaire d'ajout -->
+  <div class="card mb-4">
+    <div class="card-header">Nouveau Remboursement</div>
+    <div class="card-body">
+      <form (submit)="createRemboursement()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Crédit</label>
+            <select class="form-select" [(ngModel)]="newRemboursement.creditId" name="creditId" required>
+              <option *ngFor="let credit of credits" [value]="credit.id">
+                {{ credit.client?.nom }} - {{ credit.montant | currency }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Montant</label>
+            <input type="number" class="form-control" [(ngModel)]="newRemboursement.montant" name="montant" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" [(ngModel)]="newRemboursement.date" name="date" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Méthode</label>
+            <select class="form-select" [(ngModel)]="newRemboursement.date" name="methode">
+              <option value="espece">Espèce</option>
+              <option value="cheque">Chèque</option>
+              <option value="virement">Virement</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Enregistrer Remboursement</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des remboursements -->
+  <div class="card">
+    <div class="card-header">Liste des Remboursements</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Crédit</th>
+          <th>Client</th>
+          <th>Montant</th>
+          <th>Date</th>
+          <th>Méthode</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let remboursement of remboursements">
+          <td>{{ remboursement.id }}</td>
+          <td>{{ remboursement.credit?.id }}</td>
+          <td>{{ remboursement.credit?.client?.nom }} {{ remboursement.credit?.client?.prenom }}</td>
+          <td>{{ remboursement.montant | currency }}</td>
+          <td>{{ remboursement.date | date }}</td>
+          <td>
+              <span class="badge"
+                    [class.badge-primary]="remboursement.methode === 'espece'"
+                    [class.badge-info]="remboursement.methode === 'cheque'"
+                    [class.badge-success]="remboursement.methode === 'virement'">
+                {{ remboursement.methode }}
+              </span>
+          </td>
+          <td>
+            <button (click)="selectRemboursement(remboursement)" class="btn btn-sm btn-info me-2">Modifier</button>
+            <button (click)="deleteRemboursement(remboursement.id)" class="btn btn-sm btn-danger">Supprimer</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal de modification -->
+  <div *ngIf="selectedRemboursement" class="modal fade show" style="display: block; background-color: rgba(0,0,0,0.5)">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modifier Remboursement</h5>
+          <button type="button" class="btn-close" (click)="selectedRemboursement = null"></button>
+        </div>
+        <div class="modal-body">
+          <form (submit)="updateRemboursement()">
+            <div class="mb-3">
+              <label class="form-label">Montant</label>
+              <input type="number" class="form-control" [(ngModel)]="selectedRemboursement" name="montant" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Méthode</label>
+              <select class="form-select" [(ngModel)]="selectedRemboursement" name="methode">
+                <option value="espece">Espèce</option>
+                <option value="cheque">Chèque</option>
+                <option value="virement">Virement</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

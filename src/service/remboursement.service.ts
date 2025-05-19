@@ -32,7 +32,7 @@ export class RemboursementService {
     return this.http.post<Remboursement>(this.apiUrl, remboursement);
   }
 
-  updateRemboursement(id: number, remboursement: Remboursement): Observable<Remboursement> {
+  updateRemboursement(id: number | undefined, remboursement: Remboursement): Observable<Remboursement> {
     return this.http.put<Remboursement>(`${this.apiUrl}/${id}`, remboursement);
   }
 
